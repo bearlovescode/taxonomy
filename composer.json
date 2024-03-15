@@ -1,0 +1,16 @@
+{
+    "name": "bearlovescode/taxonomy",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Bearlovescode\\Taxonomy\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Nic Barr",
+            "email": "code@bearlovescode.com"
+        }
+    ],
+    "require": {}
+}
