@@ -12,5 +12,19 @@
             "email": "code@bearlovescode.com"
         }
     ],
-    "require": {}
+    "repositories": [
+        { "type": "git", "url":  "https://github.com/bearlovescode/datamodels.git" }
+    ],
+    "require": {
+        "illuminate/support": "^11.0",
+        "illuminate/database": "^11.0",
+        "bearlovescode/datamodels": "^1.1"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "\\Bearlovescode\\Taxonomy\\Providers\\TaxonomyServiceProvider"
+            ]
+        }
+    }
 }
