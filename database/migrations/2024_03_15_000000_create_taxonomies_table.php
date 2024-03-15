@@ -9,7 +9,7 @@ return new class extends Migration
             Schema::create('taxonomies', function (\Illuminate\Database\Schema\Blueprint $table)
             {
                 $table->uuid('id')->primary();
-                $table->enum('type', ['tag', 'category'])->primary('tag');
+                $table->enum('type', ['tag', 'category'])->default('tag');
                 $table->string('title');
                 $table->softDeletes();
                 $table->timestamps();
