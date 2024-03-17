@@ -18,7 +18,8 @@
     "require": {
         "illuminate/support": "^10.48",
         "illuminate/database": "^10.48",
-        "bearlovescode/datamodels": "^1.1"
+        "bearlovescode/datamodels": "^1.1",
+        "illuminate/view": "^10.48"
     },
     "extra": {
         "laravel": {
