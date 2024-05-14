@@ -7,6 +7,8 @@
     {
         public string $id;
         public string $type;
+        public string $slug;
         public string $title;
+        public string $description;
 
     }

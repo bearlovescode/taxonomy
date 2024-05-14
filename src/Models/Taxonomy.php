@@ -12,7 +12,9 @@
 
         protected $fillable = [
             'type',
-            'title'
+            'slug',
+            'title',
+            'description'
         ];
 
         public function asDto(): TaxonomyDto
