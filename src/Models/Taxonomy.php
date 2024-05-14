@@ -27,8 +27,8 @@
             parent::boot();
 
             static::creating(function (Taxonomy $model) {
-                if (empty($this->slug))
-                    $this->slug = Str::slug($this->title);
+                if (empty($model->slug))
+                    $model->slug = Str::slug($model->title);
             });
         }
     }
