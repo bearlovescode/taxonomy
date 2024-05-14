@@ -5,7 +5,7 @@
     use Bearlovescode\Taxonomy\Models\Taxonomy;
     use Illuminate\Support\Collection;
 
-    class TaxonomyTermService
+    class TaxonomyService
     {
         public function all(): Collection
         {
@@ -22,7 +22,7 @@
             return Taxonomy::where('slug', $slug)->first()->asDto();
         }
 
-        public function create(array $data)
+        public function save(array $data)
         {
             return Taxonomy::create($data);
         }
