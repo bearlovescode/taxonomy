@@ -24,6 +24,8 @@
         }
 
         public static function boot() {
+            parent::boot();
+
             static::creating(function (Taxonomy $model) {
                 if (empty($this->slug))
                     $this->slug = Str::slug($this->title);
