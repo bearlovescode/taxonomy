@@ -31,7 +31,7 @@ class HashtagHelper
 
     }
 
-    public static function convertHashtagToLink(string $body, string $baseUrl): string
+    public static function convertHashtagToLink(string $body, string $linkPattern): string
     {
         $hashtags = self::extractHashtags($body);
 
@@ -39,7 +39,7 @@ class HashtagHelper
 
         foreach ($hashtags as $tag)
         {
-            $repl = sprintf('<a href="%s/%s">%s</a>', $baseUrl, $tag[1], $tag[0]);
+            $repl = sprintf($linkPattern, $tag[1]);
             $body = str_replace($tag[0], $repl, $body);
         }
 
