@@ -5,6 +5,7 @@
     use Illuminate\Database\Eloquent\Concerns\HasUuids;
     use Illuminate\Database\Eloquent\Model;
     use Illuminate\Database\Eloquent\SoftDeletes;
+    use Illuminate\Support\Str;
 
     class Taxonomy extends Model
     {
@@ -12,11 +13,22 @@
 
         protected $fillable = [
             'type',
-            'title'
+            'slug',
+            'title',
+            'description'
         ];
 
         public function asDto(): TaxonomyDto
         {
             return new TaxonomyDto($this->getAttributes());
+        }
+
+        public static function boot() {
+            parent::boot();
+
+            static::creating(function (Taxonomy $model) {
+                if (empty($model->slug))
+                    $model->slug = Str::slug($model->title);
+            });
         }
     }
