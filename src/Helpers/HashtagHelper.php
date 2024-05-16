@@ -5,30 +5,49 @@ class HashtagHelper
 {
     public static function extractHashtags(string $body, string $marker = '#'): array
     {
-        $body = htmlspecialchars_decode($body, ENT_QUOTES | ENT_XML1);
-//            $body = (mb_convert_encoding($body, 'UTF-8', 'HTML-ENTITIES'));
-        $pattern = sprintf('/%s(\w+)/', $marker);
+        $body = self::convertHtmlEntities($body);
+        $pattern = sprintf('/%s\w+/', $marker);
+        $rawMatches = [];
         $matches = [];
 
-        preg_match_all($pattern, $body, $matches);
+        preg_match_all($pattern, $body, $rawMatches);
+
+        foreach ($rawMatches as $match)
+        {
+            if (empty($match)) continue;
+
+            foreach ($match as $tag)
+            {
+                $keyword = strtolower(substr($tag, 1));
+                $matches[] = [
+                    $tag,
+                    $keyword
+                ];
+            }
+        }
 
         return $matches;
+
+
     }
 
     public static function convertHashtagToLink(string $body, string $baseUrl): string
     {
         $hashtags = self::extractHashtags($body);
 
-        $updatedBody = $body;
+        if (empty($hashtags)) return $body;
 
         foreach ($hashtags as $tag)
         {
-            if (empty($tag) || empty($tag[0]))
-                continue;
-
-            $updatedBody = preg_replace(sprintf('/%s/', $tag[0]), sprintf('%s/%s', $baseUrl, $tag[0]), $updatedBody);
+            $repl = sprintf('<a href="%s/%s">%s</a>', $baseUrl, $tag[1], $tag[0]);
+            $body = str_replace($tag[0], $repl, $body);
         }
 
-        return $updatedBody;
+        return $body;
+    }
+
+    private static function convertHtmlEntities(string $body): string
+    {
+        return html_entity_decode(htmlspecialchars_decode($body), ENT_QUOTES|ENT_HTML5);
     }
 }
