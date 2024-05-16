@@ -39,7 +39,7 @@ class HashtagHelper
 
         foreach ($hashtags as $tag)
         {
-            $repl = sprintf($linkPattern, $tag[1]);
+            $repl = sprintf($linkPattern, $tag[1], $tag[0]);
             $body = str_replace($tag[0], $repl, $body);
         }
 
